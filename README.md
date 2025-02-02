@@ -10,4 +10,12 @@ Note: Option to show in Devanagri/Latin script and change font size. You can als
 
 # Show Appreciation
 
-Found the app helpful in your music journey? [Buy me a coffee!](https://paypal.me/pamitabh)
+Found the app helpful in your music journey? Consider supporting its development and maintenance:
+
+- Share the app with fellow musicians
+- Provide feedback and suggestions
+- ☕[Buy me a coffee!](https://paypal.me/pamitabh)
+- 🌟[Star the project on GitHub](https://github.com/pamitabh/indian-classical-music-practice)
+
+Your support is greatly appreciated!
+
