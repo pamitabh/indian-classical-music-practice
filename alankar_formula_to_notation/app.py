@@ -4,22 +4,27 @@ from shiny import App, render, ui
 
 # TODO Justify each line
 # TODO Background color spacegray
-# TODO Light mode/dark mode
+# DONE Light mode/dark mode
 # TODO Add Bhatkhande Notation
-# TODO Add buy me a coffee link
+# DONE Add buy me a coffee link
 # TODO Add about page
 
-app_ui = ui.page_sidebar(
+app_ui = ui.page_fluid(
+    ui.page_sidebar(
     ui.sidebar(
         ui.input_select("swar_script", "Swar Notation using:", choices=["Devanaagri script", "Latin script"]),
         ui.input_numeric("formula_aroha", "Formula?", value=1234, min=1, max=10e10),
         ui.input_switch("aroha_avaroha_flag", "Aroha and Avaroha same formula?", value=True),
         ui.output_ui("conditional_input"),
-        ui.input_slider("font_size", "Font Size", min=10, max=30, value=20)
+        ui.input_slider("font_size", "Font Size", min=10, max=30, value=20),
+        ui.div(
+            ui.span("Light or Dark mode "),
+            ui.input_dark_mode(),
+        ),
     ),
     ui.output_ui("display_notation"),
     title="Paltan Practise Generator (Alankar Long Notation)",
-)
+))
 
 swar_devanagri = [
     ".प ",
