@@ -14,8 +14,8 @@ Found the app helpful in your music journey? Consider supporting its development
 
 - Share the app with fellow musicians
 - Provide feedback and suggestions
-- ☕[ Buy me a coffee!](https://paypal.me/pamitabh)
-- 🌟[ Star the project on GitHub](https://github.com/pamitabh/indian-classical-music-practice)
+- ☕ [Buy me a coffee!](https://paypal.me/pamitabh)
+- 🌟 [Star the project on GitHub](https://github.com/pamitabh/indian-classical-music-practice)
 
 Your support is greatly appreciated!
 

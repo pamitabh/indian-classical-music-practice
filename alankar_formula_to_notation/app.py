@@ -1,5 +1,3 @@
-import html
-
 from shiny import App, render, ui
 
 # TODO Justify each line
