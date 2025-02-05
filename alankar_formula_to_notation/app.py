@@ -3,7 +3,7 @@ from shiny import App, reactive, render, ui
 # TODO Add Bhatkhande Notation
 
 def komal(text):
-    return "".join(f"<u>{char}</u>" if char.strip() else char for char in text)
+    return "".join(f"<u>{char}</u>" if char not in [' ', '.'] else char for char in text)
 def tivra(text):
     return f"{text}\'"
 
