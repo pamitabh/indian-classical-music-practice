@@ -123,14 +123,22 @@ def server(input, output, session):
     @render.ui
     def display_notation():
         font_size = input.font_size()
+        first_note = input.first_note()
+        last_note = input.last_note()
         if input.swar_script() == "Devanagri script":
             title = {'aroha_heading': "* आरोह *",
                      'avaroha_heading': "* अवरोह *"}
-            swar = SWAR_DEVANAGRI[SWAR_DEVANAGRI.index(str(input.first_note())):SWAR_DEVANAGRI.index(str(input.last_note()))+1]
+            if first_note in SWAR_DEVANAGRI:
+                swar = SWAR_DEVANAGRI[SWAR_DEVANAGRI.index(first_note):SWAR_DEVANAGRI.index(last_note)+1]
+            else:
+                swar = SWAR_DEVANAGRI
         else:
             title = {'aroha_heading': "* Aroha *",
                      'avaroha_heading': "* Avaroha *"}
-            swar = SWAR_LATIN[SWAR_LATIN.index(str(input.first_note())):SWAR_LATIN.index(str(input.last_note()))+1]
+            if first_note in SWAR_LATIN:
+                swar = SWAR_LATIN[SWAR_LATIN.index(first_note):SWAR_LATIN.index(last_note)+1]
+            else:
+                swar = SWAR_LATIN
             
         if input.aroha_avaroha_flag():
             aroha_text = get_all_substrings(swar, str(input.formula_aroha()))
