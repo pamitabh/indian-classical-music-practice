@@ -20,6 +20,19 @@ THAAT_SWAR_DEVANAGRI_DICT = {
     'Todi thaat': [".सा ",komal(".रे "),komal(".गा "),".म' ",".प ",komal(".ध "),".नि "," सा ",komal(" रे "),komal(" गा ")," म' "," प ",komal(" ध ")," नि "," सा.",komal(" रे."),komal(" गा.")," म'."," प.",komal(" ध.")," नि."," सा.."], 
 }
 
+THAAT_SWAR_DEVANAGRI_SIMPLIFIED_DICT = {
+    'Bilawal thaat': [".स ",".र ",".ग ",".म ",".प ",".ध ",".न "," स "," र "," ग "," म "," प "," ध "," न "," स."," र."," ग."," म."," प."," ध."," न."," स.."],
+    'Kalyan thaat': [".स ",".र ",".ग ",".म' ",".प ",".ध ",".न "," स "," र "," ग "," म' "," प "," ध "," न "," स."," र."," ग."," म'."," प."," ध."," न."," स.."],
+    'Khamaj thaat': [".स ",".र ",".ग ",".म ",".प ",".ध ",komal(".न ")," स "," र "," ग "," म "," प "," ध ",komal(" न ")," स."," र."," ग "," म."," प."," ध.",komal(" न.")," स.."], 
+    'Kafi thaat': [".स ",".र ",komal(".ग "),".म ",".प ",".ध ",komal(".न ")," स "," र ",komal(" ग ")," म "," प "," ध ",komal(" न ")," स."," र.",komal(" ग.")," म."," प."," ध.",komal(" न.")," स.."],
+    'Asavari thaat': [".स ",".र ",komal(".ग "),".म ",".प ",komal(".ध "),komal(".न ")," स "," र ",komal(" ग ")," म "," प ",komal(" ध "),komal(" न ")," स."," र.",komal(" ग.")," म."," प.",komal(" ध."),komal(" न.")," स.."],
+    'Bhairavi thaat': [".स ",komal(".र "),komal(".ग "),".म ",".प ",komal(".ध "),komal(".न ")," स ",komal(" र "),komal(" ग ")," म "," प ",komal(" ध "),komal(" न ")," स.",komal(" र."),komal(" ग.")," म."," प.",komal(" ध."),komal(" न.")," स.."],
+    'Bhairav thaat': [".स ",komal(".र "),".ग ",".म ",".प ",komal(".ध "),".न "," स ",komal(" र ")," ग "," म "," प ",komal(" ध ")," न "," स.",komal(" र.")," ग."," म."," प.",komal(" ध.")," न."," स.."],
+    'Marwa thaat': [".स ",komal(".र "),".ग ",".म' ",".प ",".ध ",".न "," स ",komal(" र ")," ग "," म' "," प "," ध "," न "," स.",komal(" र.")," ग."," म'."," प."," ध."," न."," स.."],
+    'Purvi thaat': [".स ",komal(".र "),".ग ",".म' ",".प ",komal(".ध "),".न "," स ",komal(" र ")," ग "," म' "," प ",komal(" ध ")," न "," स.",komal(" र.")," ग."," म'."," प.",komal(" ध.")," न."," स.."],
+    'Todi thaat': [".स ",komal(".र "),komal(".ग "),".म' ",".प ",komal(".ध "),".न "," स ",komal(" र "),komal(" ग ")," म' "," प ",komal(" ध ")," न "," स.",komal(" र."),komal(" ग.")," म'."," प.",komal(" ध.")," न."," स.."], 
+}
+
 THAAT_SWAR_LATIN_DICT = {
     'Bilawal thaat': [".S ",".R ",".G ",".M ",".P ",".D ",".N "," S "," R "," G "," M "," P "," D "," N "," S."," R."," G."," M."," P."," D."," N."," S.."],
     'Kalyan thaat': [".S ",".R ",".G ",".M' ",".P ",".D ",".N "," S "," R "," G "," M' "," P "," D "," N "," S."," R."," G."," M'."," P."," D."," N."," S.."],
@@ -36,12 +49,12 @@ THAAT_SWAR_LATIN_DICT = {
 app_ui = ui.page_fluid(
     ui.page_sidebar(
         ui.sidebar(
-            ui.input_select("swar_script", "Swar Notation using:", choices=["Devanagri script", "Latin script"]),
+            ui.input_select("swar_script", "Swar Notation using:", choices=["Devanagri Simplified", "Devanagri", "Latin"]),
             ui.input_numeric("formula_aroha", "Formula?", value=1234, min=1, max=10e10),
             ui.input_slider("font_size", "Font Size", min=10, max=30, value=20),
             ui.div(
                 # ui.span("Light or Dark mode "),
-                ui.input_dark_mode(),
+                ui.input_dark_mode(mode="light"),
             ),
             ui.accordion(
                 ui.accordion_panel(
@@ -57,7 +70,7 @@ app_ui = ui.page_fluid(
             ),
         ),
         ui.output_ui("display_notation"),
-        title="Paltan Practise Generator (Alankar Long Notation)",
+        title="Paltan Practise Generator",
     )
 )
 
@@ -75,7 +88,10 @@ def server(input, output, session):
     @reactive.Effect
     def update_swar_choices_first_note():
         thaat = input.thaat()
-        if input.swar_script() == "Devanagri script":
+        if input.swar_script() == "Devanagri Simplified":
+            thaat_swar = THAAT_SWAR_DEVANAGRI_SIMPLIFIED_DICT[thaat]
+            default_first_note = ".प "
+        elif input.swar_script() == "Devanagri":
             thaat_swar = THAAT_SWAR_DEVANAGRI_DICT[thaat]
             default_first_note = ".प "
         else:
@@ -86,7 +102,10 @@ def server(input, output, session):
     @reactive.Effect
     def update_swar_choices_last_note():
         thaat = input.thaat()
-        if input.swar_script() == "Devanagri script":
+        if input.swar_script() == "Devanagri Simplified":
+            thaat_swar = THAAT_SWAR_DEVANAGRI_SIMPLIFIED_DICT[thaat]
+            default_last_note = " प."
+        elif input.swar_script() == "Devanagri":
             thaat_swar = THAAT_SWAR_DEVANAGRI_DICT[thaat]
             default_last_note = " प."
         else:
@@ -113,7 +132,15 @@ def server(input, output, session):
         font_size = input.font_size()
         first_note = input.first_note()
         last_note = input.last_note()
-        if input.swar_script() == "Devanagri script":
+        if input.swar_script() == "Devanagri Simplified":
+            title = {'aroha_heading': "* आरोह *",
+                     'avaroha_heading': "* अवरोह *"}
+            swar_devanagri_simplified = THAAT_SWAR_DEVANAGRI_SIMPLIFIED_DICT[thaat]
+            if first_note in swar_devanagri_simplified:
+                swar = swar_devanagri_simplified[swar_devanagri_simplified.index(first_note):swar_devanagri_simplified.index(last_note)+1]
+            else:
+                swar = swar_devanagri_simplified
+        elif input.swar_script() == "Devanagri":
             title = {'aroha_heading': "* आरोह *",
                      'avaroha_heading': "* अवरोह *"}
             swar_devanagri = THAAT_SWAR_DEVANAGRI_DICT[thaat]
