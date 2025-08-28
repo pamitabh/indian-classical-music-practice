@@ -56,6 +56,7 @@ THAAT_SWAR_LATIN_DICT = {
 }
     
 app_ui = ui.page_fluid(
+    ui.head_content(ui.HTML(UMAMI_SCRIPT)),
     ui.page_sidebar(
         ui.sidebar(
             ui.input_select("swar_script", "Swar Notation using:", choices=["Devanagri Simplified", "Devanagri", "Latin"]),
