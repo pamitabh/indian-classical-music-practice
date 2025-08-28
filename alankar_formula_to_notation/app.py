@@ -2,6 +2,15 @@ from shiny import App, reactive, render, ui
 
 # TODO Add Bhatkhande Notation
 
+UMAMI_SCRIPT = """
+  <script 
+    async 
+    src="https://umami-two-rouge.vercel.app/script.js" 
+    data-website-id="7774b7f7-ec77-4fa0-b9c8-be5df3ee6ad5"
+    data-domains="pamitabh.github.io/indian-classical-music-practice"
+  ></script>
+"""
+
 def komal(text):
     return "".join(f"<u>{char}</u>" if char not in [' ', '.'] else char for char in text)
 def tivra(text):
